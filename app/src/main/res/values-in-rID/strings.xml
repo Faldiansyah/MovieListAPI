@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">MovieListAPI</string>
     <string name="hello_detail">Termukan film favoritmu di sini</string>
-    <string name="section_title">Populer</string>
+    <string name="popular_title">Film Populer</string>
     <string name="menu_favorite">Favorit</string>
     <string name="login_title_form">Masuk</string>
     <string name="login_description">Masuk untuk mengakses akun Anda</string>
@@ -21,4 +21,8 @@
     <string name="button_save_update">Simpan</string>
     <string name="registration_success">Registrasi Berhasil</string>
     <string name="update_success">Ubah data berhasil</string>
+    <string name="detail_overview_title">Ringkasan</string>
+    <string name="now_playing">Tayang saat ini</string>
+    <string name="release_label">Rilis</string>
+    <string name="hello">"Halo, "</string>
 </resources>

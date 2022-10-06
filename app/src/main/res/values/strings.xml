@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello">Hello,</string>
     <string name="hello_detail">Let\'s find your favorite movie</string>
-    <string name="section_title">Popular</string>
+    <string name="popular_title">Popular Movie</string>
     <string name="menu_favorite">Favorite</string>
     <string name="login_title_form">Login</string>
     <string name="login_description">Login to access you account</string>
@@ -23,4 +23,7 @@
     <string name="button_save_update">Save</string>
     <string name="registration_success">Registration Success</string>
     <string name="update_success">Update Success</string>
+    <string name="detail_overview_title">Overview</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="release_label">Release :</string>
 </resources>
