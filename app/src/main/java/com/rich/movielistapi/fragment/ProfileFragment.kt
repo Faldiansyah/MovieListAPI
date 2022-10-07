@@ -1,5 +1,6 @@
 package com.rich.movielistapi.fragment
 
+import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -45,9 +46,11 @@ class ProfileFragment : Fragment() {
 
 
     private fun getDataUser(){
+        showLoading(true)
         userVM.callGetUserById(id)
         userVM.observerLDGetUserById().observe(viewLifecycleOwner) {
             if (it != null) {
+                showLoading(false)
                 binding.emailInput.setText(it.email)
                 binding.usernameInput.setText(it.username)
                 binding.passwordInput.setText(it.password)
@@ -71,9 +74,18 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logout() {
-        editor.clear()
-        editor.apply()
-        findNavController().navigate(R.id.action_profileFragment_to_registerLoginFragment)
+        AlertDialog.Builder(requireContext())
+            .setTitle("Logout")
+            .setMessage("Are you sure want to logout?")
+            .setPositiveButton("Yes") { dialog, which ->
+                editor.clear()
+                editor.apply()
+                findNavController().navigate(R.id.action_profileFragment_to_registerLoginFragment)
+            }
+            .setNegativeButton("No") { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun updateUser(){
@@ -88,6 +100,16 @@ class ProfileFragment : Fragment() {
                 }
                 Toast.makeText(requireContext(), resources.getString(R.string.update_success), Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun showLoading(isLoading : Boolean) {
+        if(isLoading){
+            binding.lottieLoading.visibility = View.VISIBLE
+            binding.progressBarContainer.visibility = View.VISIBLE
+        }else{
+            binding.lottieLoading.visibility = View.GONE
+            binding.progressBarContainer.visibility = View.GONE
         }
     }
 }

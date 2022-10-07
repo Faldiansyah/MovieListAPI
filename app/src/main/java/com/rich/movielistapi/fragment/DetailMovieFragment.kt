@@ -38,9 +38,11 @@ class DetailMovieFragment : Fragment() {
     }
 
     private fun getMovieDetail() {
+        showLoading(true)
         movieVM.callGetMovieDetail(movieId)
         movieVM.observerGetMovieDetail().observe(viewLifecycleOwner) {
             if (it != null) {
+                showLoading(false)
                 Glide.with(requireContext())
                     .load("https://image.tmdb.org/t/p/w500${it.posterPath}")
                     .into(binding.imgPoster)
@@ -54,5 +56,13 @@ class DetailMovieFragment : Fragment() {
         }
     }
 
-
+    private fun showLoading(isLoading : Boolean) {
+        if(isLoading){
+            binding.lottieLoading.visibility = View.VISIBLE
+            binding.progressBarContainer.visibility = View.VISIBLE
+        }else{
+            binding.lottieLoading.visibility = View.GONE
+            binding.progressBarContainer.visibility = View.GONE
+        }
+    }
 }

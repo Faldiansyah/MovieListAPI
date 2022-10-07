@@ -62,4 +62,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/btnEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/english_lang"
+        android:textColor="@color/description_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="@dimen/margin_12"/>
+
+    <TextView
+        android:id="@+id/btnIndonesia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/indonesian_lang"
+        android:textColor="@color/description_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="@dimen/margin_12"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,4 +25,9 @@
     <string name="now_playing">Tayang saat ini</string>
     <string name="release_label">Rilis</string>
     <string name="hello">"Halo, "</string>
+    <string name="indonesian_lang">Indonesia</string>
+    <string name="english_lang">Inggris</string>
+    <string name="pass_not_match">Konfirmasi Password tidak sama</string>
+    <string name="required_field">Semua input wajib diisi</string>
+    <string name="login_failed">Username atau Password salah</string>
 </resources>

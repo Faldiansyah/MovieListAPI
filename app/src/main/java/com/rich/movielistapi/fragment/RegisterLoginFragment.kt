@@ -1,5 +1,6 @@
 package com.rich.movielistapi.fragment
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.rich.movielistapi.MainActivity
 import com.rich.movielistapi.R
 import com.rich.movielistapi.databinding.FragmentRegisterLoginBinding
 import com.rich.movielistapi.viewmodel.UserViewModel
+import java.util.*
 
 class RegisterLoginFragment : Fragment() {
     private lateinit var binding: FragmentRegisterLoginBinding
@@ -44,6 +47,12 @@ class RegisterLoginFragment : Fragment() {
         binding.loginForm.btnLogin.setOnClickListener {
             loginUser()
         }
+        binding.btnEnglish.setOnClickListener {
+            setLocale("en")
+        }
+        binding.btnIndonesia.setOnClickListener {
+            setLocale("id")
+        }
     }
 
     private fun registerUser() {
@@ -53,12 +62,12 @@ class RegisterLoginFragment : Fragment() {
         val passwordConfirm = binding.registerForm.passwordConfirmInput.text.toString()
 
         if(email.isEmpty() || username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()){
-            binding.registerForm.emailInput.error = "Please fill the field"
-            binding.registerForm.usernameInput.error = "Please fill the field"
-            binding.registerForm.passwordInput.error = "Please fill the field"
-            binding.registerForm.passwordConfirmInput.error = "Please fill the field"
+            binding.registerForm.emailInput.error = resources.getString(R.string.required_field)
+            binding.registerForm.usernameInput.error = resources.getString(R.string.required_field)
+            binding.registerForm.passwordInput.error = resources.getString(R.string.required_field)
+            binding.registerForm.passwordConfirmInput.error = resources.getString(R.string.required_field)
         }else if(password != passwordConfirm) {
-            binding.registerForm.passwordConfirmInput.error = "Confirmation Password doesn't match"
+            binding.registerForm.passwordConfirmInput.error = resources.getString(R.string.pass_not_match)
         }else{
             userVM.callRegisterUser(email, username, password)
             userVM.observerLDRegisterUser().observe(viewLifecycleOwner) {
@@ -77,8 +86,8 @@ class RegisterLoginFragment : Fragment() {
         var isFound = false
 
         if(username.isEmpty() || password.isEmpty()) {
-            binding.loginForm.usernameInput.error = "Please fill the field"
-            binding.loginForm.passwordInput.error = "Please fill the field"
+            binding.loginForm.usernameInput.error = resources.getString(R.string.required_field)
+            binding.loginForm.passwordInput.error = resources.getString(R.string.required_field)
         }else{
             userVM.callGetAllUser()
             userVM.observerLDGetUser().observe(viewLifecycleOwner) {
@@ -96,7 +105,7 @@ class RegisterLoginFragment : Fragment() {
                         }
                     }
                     if(!isFound){
-                        Toast.makeText(requireContext(), "Username or Password is wrong", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), resources.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -144,5 +153,15 @@ class RegisterLoginFragment : Fragment() {
             binding.loginTitle.setTextColor(resources.getColor(R.color.description_color))
             binding.registerTitle.setTextColor(resources.getColor(R.color.white))
         }
+    }
+
+    private fun setLocale(lang: String) {
+        val myLocale = Locale(lang)
+        val res = resources
+        val dm = res.displayMetrics
+        val conf = res.configuration
+        conf.locale = myLocale
+        res.updateConfiguration(conf, dm)
+        activity?.startActivity(Intent(activity, MainActivity::class.java))
     }
 }
