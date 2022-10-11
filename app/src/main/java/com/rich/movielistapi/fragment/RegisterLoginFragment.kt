@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.rich.movielistapi.MainActivity
@@ -61,10 +62,13 @@ class RegisterLoginFragment : Fragment() {
         val password = binding.registerForm.passwordInput.text.toString()
         val passwordConfirm = binding.registerForm.passwordConfirmInput.text.toString()
 
-        if(email.isEmpty() || username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()){
+        if(email.isEmpty() ) {
             binding.registerForm.emailInput.error = resources.getString(R.string.required_field)
+        }else if(username.isEmpty()) {
             binding.registerForm.usernameInput.error = resources.getString(R.string.required_field)
+        }else if (password.isEmpty()) {
             binding.registerForm.passwordInput.error = resources.getString(R.string.required_field)
+        }else if (passwordConfirm.isEmpty()) {
             binding.registerForm.passwordConfirmInput.error = resources.getString(R.string.required_field)
         }else if(password != passwordConfirm) {
             binding.registerForm.passwordConfirmInput.error = resources.getString(R.string.pass_not_match)
@@ -85,9 +89,10 @@ class RegisterLoginFragment : Fragment() {
         val password = binding.loginForm.passwordInput.text.toString()
         var isFound = false
 
-        if(username.isEmpty() || password.isEmpty()) {
+        if(username.isEmpty()){
             binding.loginForm.usernameInput.error = resources.getString(R.string.required_field)
-            binding.loginForm.passwordInput.error = resources.getString(R.string.required_field)
+        }else if(password.isEmpty()){
+                binding.loginForm.passwordInput.error = resources.getString(R.string.required_field)
         }else{
             userVM.callGetAllUser()
             userVM.observerLDGetUser().observe(viewLifecycleOwner) {

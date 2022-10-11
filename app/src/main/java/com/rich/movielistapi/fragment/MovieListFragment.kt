@@ -120,6 +120,7 @@ class MovieListFragment : Fragment() {
         movieVM.callGetPopularMovieApi()
         movieVM.getLDMovie().observe(viewLifecycleOwner){
             if (it != null) {
+                Log.d("RESULT",it.toString())
                 showLoading(false)
                 showPopularMovies(it)
             }

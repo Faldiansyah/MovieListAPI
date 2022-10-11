@@ -29,6 +29,6 @@
     <string name="indonesian_lang">Indonesian</string>
     <string name="english_lang">English</string>
     <string name="pass_not_match">Confirmation Password doesn\'t match</string>
-    <string name="required_field">Please fill all field</string>
+    <string name="required_field">This field is required</string>
     <string name="login_failed">Username or Password is wrong</string>
 </resources>
